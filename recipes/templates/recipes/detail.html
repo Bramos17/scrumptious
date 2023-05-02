@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+  <main>
+    <div class="ingredients">
+      <h1>{{ recipe_object.title }}</h1>
+      <img src="{{ recipe_object.picture }}">
+      <p>{{ recipe_object.description }}</p>
+      <p>4.3 Stars</p>
+      <p>written by {{ recipe_object.author|default:"" }}</p>
+      <div class="edit">
+      <a href="{% url 'edit_recipe' recipe_object.id %}">Edit Recipe</a>
+      </div>
+      <h2>Ingredients</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Amount</th>
+            <th>Food Item</th>
+          </tr>
+          <tbody>
+            {% for ingredent in recipe_object.ingredients.all %}
+              <tr>
+                <td>{{ ingredent.amount }}</td>
+                <td>{{ ingredent.food_item }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </thead>
+      </table>
+      <h2>Steps</h2>
+      <ol>
+        {% for step in recipe_object.steps.all %}
+        <li>{{ step.instruction }}</li>
+        {% endfor %}
+      </ol>
+    </div>
+  </main>
+{% endblock content %}

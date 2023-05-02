@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+  <main>
+    <h1>Create {{ recipe_object.title }}</h1>
+    <form Method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button>Create</button>
+    </form>
+  </main>
+{% endblock content %}

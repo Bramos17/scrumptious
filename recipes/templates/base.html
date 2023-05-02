@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Scrumptious Recipes - find and share delicious recipes">
+        <meta name="keywords" content="recipes, food, cooking">
+        <link rel="stylesheet" href="{% static 'css/recipes.css' %}">
+        <title>Scrumptious Recipes</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                {% if user.is_authenticated %}
+                    <div class="welcome">
+                    Hello, {{ user.username }}!
+                    </div>
+                    <div class="links">
+                    <a href="{% url 'recipe_list' %}">Main page</a>
+                    <a href="{% url 'create_recipe' %}">Create a recipe</a>
+                    <a href="{% url 'logout' %}">Logout</a>
+                    </div>
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                    <a href="{% url 'signup' %}">Sign Up</a>
+                {% endif %}
+            </nav>
+        </header>
+        {% block content %}
+        {% endblock content %}
+        <footer>
+            Made with love by Scrumptious Recipes
+        </footer>
+    </body>
+</html>
